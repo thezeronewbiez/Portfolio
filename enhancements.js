@@ -1,15 +1,15 @@
-/* enhancements.js: load AFTER script.js. Nothing here edits your existing code;
-   if this file fails to load, the site still works exactly as before. */
+/* โหลดไฟล์นี้หลัง script.js เพื่อเติมลูกเล่น โดยไม่ไปแก้ข้อมูลหลักของเว็บ */
 (() => {
+  // เช็กก่อนว่าผู้ใช้ขอลดการเคลื่อนไหวไว้ไหม ถ้าขอไว้ก็ข้ามเอฟเฟกต์บางอย่าง
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // 1. Navbar gains depth once the page scrolls (styled by .is-scrolled in the CSS)
+  // เลื่อนหน้าแล้วเพิ่มคลาสให้แถบเมนู เพื่อให้ CSS เปลี่ยนเงาและพื้นหลัง
   const bar = document.querySelector('.navbar-wrapper');
   const onScroll = () => bar && bar.classList.toggle('is-scrolled', window.scrollY > 24);
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // 2. Scroll-spy: the active nav link follows the section in view, not just clicks
+  // ดูว่า section ไหนอยู่กลางจอ แล้วทำเครื่องหมายเมนูของ section นั้น
   const links = [...document.querySelectorAll('.nav-link')];
   const spy = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -22,7 +22,7 @@
     if (section) spy.observe(section);
   });
 
-  // 3. One-time reveal for dense blocks (cards and activity rows)
+  // ค่อย ๆ เผยการ์ดตอนเลื่อนมาถึง และทำครั้งเดียวต่อการ์ด
   if (!reduce) {
     const items = [...document.querySelectorAll('.capability-card, .activity-item')];
     items.forEach((el, i) => {
@@ -35,7 +35,7 @@
         const el = entry.target;
         el.classList.add('is-visible');
         observer.unobserve(el);
-        // hand control back to the normal hover transitions once revealed
+        // จบเอฟเฟกต์เข้าแล้ว เอาคลาสชั่วคราวออกเพื่อให้ hover ทำงานตามปกติ
         setTimeout(() => {
           el.classList.remove('reveal', 'is-visible');
           el.style.transitionDelay = '';
@@ -45,7 +45,7 @@
     items.forEach(el => reveal.observe(el));
   }
 
-  // 4. Count-up for the About stats (skips years such as 2026)
+  // นับตัวเลขสถิติใน About เมื่อเลื่อนมาถึง แต่ไม่แตะตัวเลขที่เป็นปี
   document.querySelectorAll('.about-stats dd').forEach(dd => {
     const match = dd.textContent.trim().match(/^(\d+)(\+?)$/);
     if (!match || reduce || Number(match[1]) > 999) return;
@@ -65,10 +65,10 @@
     }, { threshold: 0.6 }).observe(dd);
   });
 
-  // 5. Replay a short animation whenever script.js swaps carousel text or images
+  // เปลี่ยนเนื้อหาใน carousel แล้วเริ่มเอฟเฟกต์เข้าใหม่ให้ดูต่อเนื่อง
   const replay = (el, cls) => {
     el.classList.remove(cls);
-    void el.offsetWidth; // restart the animation
+    void el.offsetWidth; // อ่านขนาด element เพื่อบังคับให้เบราว์เซอร์เริ่มแอนิเมชันรอบใหม่
     el.classList.add(cls);
   };
   if (!reduce) {

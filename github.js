@@ -1,4 +1,5 @@
 (() => {
+  // ระบุบัญชีเจ้าของ repo และเตรียม URL สำหรับเรียก API กับลิงก์หน้าโปรไฟล์
   const username = 'thezeronewbiez';
   const apiBase = `https://api.github.com/users/${username}`;
   const profileUrl = `https://github.com/${username}`;
@@ -15,8 +16,10 @@
   const status = document.querySelector('#github-status');
   const repoGrid = document.querySelector('#github-repo-grid');
 
+  // ถ้าหน้านี้ไม่มีพื้นที่แสดง repo ก็ไม่ต้องเริ่มทำงาน
   if (!repoGrid) return;
 
+  // กำหนดสีประจำภาษาให้จุดและแถบดูง่ายขึ้น
   const languageColors = {
     CSS: '#563d7c',
     HTML: '#e34c26',
@@ -31,6 +34,7 @@
   let repositories = [];
   let activeLanguage = 'All';
 
+  // สร้าง element กลางไว้ใช้ซ้ำ จะได้ใส่ข้อความผ่าน textContent อย่างปลอดภัย
   function makeElement(tagName, className, text) {
     const element = document.createElement(tagName);
     if (className) element.className = className;
@@ -45,7 +49,7 @@
         return url.href;
       }
     } catch {
-      // Use the known profile URL if the API returns an unexpected repository URL.
+      // ถ้าลิงก์ที่ได้ดูไม่ถูกต้อง ให้พาไปหน้าโปรไฟล์ที่เรารู้จักแทน
     }
     return profileUrl;
   }
@@ -67,6 +71,7 @@
   }
 
   function renderProfile(profile) {
+    // นำข้อมูลบัญชีจาก GitHub ไปใส่ในส่วนหัวของ dashboard
     profileName.textContent = profile.name || profile.login;
     profileBio.textContent = profile.bio || 'Software engineering projects, experiments, and learning in progress.';
     avatar.src = profile.avatar_url;
@@ -76,6 +81,7 @@
   }
 
   function renderLanguages() {
+    // นับจำนวน repo แยกตามภาษา แล้วเรียงให้ภาษาที่ใช้บ่อยอยู่บนสุด
     const counts = new Map();
     repositories.forEach(repository => {
       if (repository.language) counts.set(repository.language, (counts.get(repository.language) || 0) + 1);
@@ -103,6 +109,7 @@
   }
 
   function renderRecentRepositories() {
+    // เรียง repo ตามวันที่อัปเดต แล้วเลือกมาแสดงแค่ 3 รายการล่าสุด
     recentList.replaceChildren();
     const recent = [...repositories]
       .sort((a, b) => new Date(b.pushed_at || b.updated_at) - new Date(a.pushed_at || a.updated_at))
@@ -129,6 +136,7 @@
   }
 
   function renderFilters() {
+    // สร้างปุ่มกรองจากภาษาที่พบจริงใน repo
     const languages = [...new Set(repositories.map(repository => repository.language).filter(Boolean))].sort();
     filterList.replaceChildren();
 
@@ -137,6 +145,7 @@
       button.type = 'button';
       button.setAttribute('aria-pressed', String(language === activeLanguage));
       button.addEventListener('click', () => {
+        // จำภาษาที่เลือก แล้ววาดปุ่มกับรายการ repo ใหม่
         activeLanguage = language;
         renderFilters();
         renderRepositories();
@@ -146,6 +155,7 @@
   }
 
   function createRepositoryCard(repository) {
+    // ประกอบข้อมูล repo หนึ่งอันเป็นการ์ด พร้อมลิงก์ไป GitHub
     const card = makeElement('article', 'github-repo-card');
     const top = makeElement('div', 'github-repo-card-top');
     const nameLink = makeElement('a', 'github-repo-name');
@@ -204,6 +214,7 @@
   }
 
   function renderRepositories() {
+    // เอาคำค้นกับภาษาที่เลือกมาใช้กรองรายการ ก่อนวาดการ์ดใหม่
     const query = searchInput.value.trim().toLocaleLowerCase();
     const filtered = repositories.filter(repository => {
       const languageMatches = activeLanguage === 'All' || repository.language === activeLanguage;
@@ -222,6 +233,7 @@
   }
 
   async function fetchJson(url) {
+    // เรียก GitHub API และแจ้งปัญหาตามสถานะที่ตอบกลับ
     const response = await fetch(url, { headers: { Accept: 'application/vnd.github+json' } });
     if (!response.ok) {
       if (response.status === 403 || response.status === 429) {
@@ -235,6 +247,7 @@
 
   async function loadGitHubData() {
     try {
+      // ดึงข้อมูลโปรไฟล์กับ repo พร้อมกัน เพื่อลดเวลารอ
       const [profile, repoData] = await Promise.all([
         fetchJson(apiBase),
         fetchJson(`${apiBase}/repos?type=owner&sort=updated&per_page=100`)
@@ -252,6 +265,7 @@
       searchInput.addEventListener('input', renderRepositories);
       renderRepositories();
     } catch (error) {
+      // ถ้าโหลดไม่สำเร็จ แสดงข้อความแทนปล่อยให้ dashboard ว่างเปล่า
       status.textContent = error instanceof Error ? error.message : 'Unable to load GitHub repositories.';
       profileBio.textContent = 'Live repository data is temporarily unavailable.';
       languageList.replaceChildren(makeElement('p', 'github-muted', 'Language data could not be loaded.'));
@@ -259,5 +273,6 @@
     }
   }
 
+  // รอให้ผู้ใช้เปิด dashboard ก่อน แล้วค่อยเรียก API แค่ครั้งแรก
   document.addEventListener('github:show-repositories', loadGitHubData, { once: true });
 })();

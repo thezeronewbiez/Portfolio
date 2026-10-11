@@ -77,7 +77,7 @@ body {
   align-items: center;
 }
 
-/* Navbar Wrapper */
+/* พื้นที่ครอบแถบเมนูและจัดให้อยู่กึ่งกลาง */
 .navbar-wrapper {
   width: 100%;
   display: flex;
@@ -87,7 +87,7 @@ body {
   z-index: 1000;
 }
 
-/* Main Navbar Container */
+/* กล่องเมนูหลัก เรียงไอคอน ลิงก์ และปุ่มต่าง ๆ ในแถวเดียว */
 .navbar {
   position: relative;
   display: flex;
@@ -106,7 +106,7 @@ body {
   user-select: none;
 }
 
-/* Home Icon Button (Left) */
+/* ปุ่มกลับหน้าแรกที่อยู่ทางซ้ายของแถบเมนู */
 .nav-home-btn {
   display: flex;
   align-items: center;
@@ -139,7 +139,7 @@ body {
   height: 22px;
 }
 
-/* Center Navigation Links */
+/* ลิงก์นำทางตรงกลางแถบเมนู */
 .nav-links {
   display: flex;
   flex: 1 1 auto;
@@ -190,7 +190,7 @@ body {
   opacity: 0.8;
 }
 
-/* Active Link Underline Indicator */
+/* ขีดใต้บอกว่าตอนนี้เลือกเมนูส่วนไหนอยู่ */
 .nav-link.active::after {
   content: '';
   position: absolute;
@@ -202,7 +202,7 @@ body {
   border-radius: 1px;
 }
 
-/* Actions Group (Right) */
+/* กลุ่มปุ่มสลับธีมและติดต่อทางขวา */
 .nav-actions {
   display: flex;
   flex: 0 0 auto;
@@ -210,7 +210,7 @@ body {
   gap: 12px;
 }
 
-/* Dark Mode / Theme Toggle Button */
+/* ปุ่มสลับธีมมืดกับธีมสว่าง */
 .nav-theme-btn {
   display: flex;
   align-items: center;
@@ -255,7 +255,7 @@ body.light-mode .nav-theme-btn .theme-icon-dark {
   display: block;
 }
 
-/* Contact Button */
+/* ปุ่มลัดไปส่วนติดต่อ */
 .nav-contact-btn {
   display: inline-flex;
   align-items: center;
@@ -381,26 +381,6 @@ body.light-mode .nav-theme-btn .theme-icon-dark {
   font-size: 12px;
 }
 
-.outline-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 38px;
-  padding: 0 16px;
-  border: 1px solid #77797e;
-  border-radius: 9px;
-  color: #242832;
-  font: 700 12px var(--font-mono);
-  text-decoration: none;
-  white-space: nowrap;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.outline-button:hover {
-  background-color: rgba(255, 255, 255, 0.45);
-  transform: translateY(-1px);
-}
-
 .view-more {
   gap: 8px;
   align-self: flex-start;
@@ -416,34 +396,6 @@ body.light-mode .nav-theme-btn .theme-icon-dark {
   width: min(86%, 700px);
   height: clamp(170px, 28vw, 240px);
   margin: 0 auto 16px;
-}
-
-.project-preview {
-  position: absolute;
-  top: 12%;
-  width: 43%;
-  height: 62%;
-  border: 6px solid #91ad0b;
-  border-radius: 20px;
-  background: #080202;
-}
-
-.project-preview-left {
-  left: 5%;
-}
-
-.project-preview-right {
-  right: 5%;
-}
-
-.project-preview-main {
-  z-index: 1;
-  top: 0;
-  left: 28%;
-  width: 44%;
-  height: 82%;
-  border-width: 7px;
-  border-radius: 22px;
 }
 
 .project-info {
@@ -667,7 +619,7 @@ body.light-mode .nav-theme-btn .theme-icon-dark {
   line-height: 1.2;
 }
 
-/* Responsive adjustments */
+/* ปรับระยะและขนาดให้พอดีกับหน้าจอที่แคบลง */
 @media (max-width: 860px) {
   .navbar {
     gap: 12px;
@@ -766,31 +718,10 @@ body.light-mode .nav-theme-btn .theme-icon-dark {
     font-size: 32px;
   }
 
-  .outline-button {
-    min-height: 28px;
-    padding: 0 10px;
-    border-radius: 7px;
-    font-size: 9px;
-  }
-
   .project-gallery {
     width: 82%;
     height: 138px;
     margin-bottom: 20px;
-  }
-
-  .project-preview {
-    top: 10%;
-    height: 84%;
-    border-width: 5px;
-    border-radius: 15px;
-  }
-
-  .project-preview-main {
-    top: 0;
-    height: 100%;
-    border-width: 6px;
-    border-radius: 17px;
   }
 
   .project-info h2 {
@@ -970,16 +901,6 @@ body.light-mode .nav-theme-btn .theme-icon-dark {
     width: 96%;
   }
 
-  .project-preview {
-    border-width: 5px;
-    border-radius: 16px;
-  }
-
-  .project-preview-main {
-    border-width: 6px;
-    border-radius: 18px;
-  }
-
   .skills-page {
     min-height: 0;
     margin-top: 72px;
@@ -1042,7 +963,7 @@ body.light-mode .nav-theme-btn .theme-icon-dark {
   }
 }
 
-/* Work gallery */
+/* หน้าตาของส่วนรวมผลงาน */
 .work-page {
   width: calc(100% + 32px);
   max-width: none;
@@ -2348,7 +2269,7 @@ body.light-mode .site-footer a:focus-visible {
   color: #38346f;
 }
 
-/* Keep reading text legible and consistent across all sections. */
+/* ใช้รูปแบบตัวอักษรเดียวกัน เพื่อให้อ่านต่อเนื่องทั้งเว็บ */
 body,
 button,
 a,
@@ -2455,14 +2376,11 @@ body :lang(th) * {
 
 
 /* =====================================================================
-   POLISH LAYER (additive). Overrides earlier rules by source order;
-   delete everything below this banner to return to the original design.
-   Selectors starting ":root body" are deliberate: they match the weight
-   of your existing "body.light-mode …" rules so BOTH themes get the upgrade.
+   ส่วนปรับหน้าตาเพิ่มเติม อยู่ท้ายไฟล์เพื่อให้กฎชุดนี้ทับค่าก่อนหน้า
+   ตัวเลือกที่ขึ้นต้นด้วย :root body ช่วยให้ธีมมืดและสว่างใช้กฎใหม่ได้เหมือนกัน
    ===================================================================== */
 
-/* 0. TOKENS: one accent (violet, already used in your project cards and
-      light-mode hovers), a body font, and a shared easing curve. */
+/* รวมค่าสี ฟอนต์เนื้อหา และจังหวะแอนิเมชันไว้จุดเดียว แก้ง่ายทั้งเว็บ */
 :root {
   --accent: #a594ff;
   --accent-line: rgba(165, 148, 255, 0.45);
@@ -2486,14 +2404,14 @@ body.light-mode {
   --tip-fg: #ffffff;
 }
 
-/* 1. GLOBAL: selection colour, scrollbar, balanced headings, focus ring */
+/* ปรับสีตอนเลือกข้อความ แถบเลื่อน หัวข้อ และเส้นบอกตำแหน่งที่กำลังโฟกัส */
 html { scrollbar-color: var(--accent-line) transparent; }
 ::selection { background: var(--accent); color: var(--on-accent); }
 :where(a, button):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 h1, h2, h3 { text-wrap: balance; }
 p { text-wrap: pretty; }
 
-/* Reading-progress bar (pure CSS; ignored by browsers without scroll timelines) */
+/* แถบด้านบนค่อย ๆ เติมตามระยะที่เลื่อน เฉพาะเบราว์เซอร์ที่รองรับ */
 @supports (animation-timeline: scroll()) {
   body::before {
     content: '';
@@ -2510,18 +2428,16 @@ p { text-wrap: pretty; }
 }
 @keyframes pl-progress { to { transform: scaleX(1); } }
 
-/* 2. TYPOGRAPHY: headings and UI keep JetBrains Mono (your identity);
-      long-form copy moves to a proportional sans for easier reading.
-      To revert, change --font-body to var(--font-ui). */
+/* หัวข้อคงฟอนต์ประจำเว็บ ส่วนข้อความยาวใช้ฟอนต์อ่านง่ายขึ้น */
 .work-subtitle, .project-description, .skills-intro, .capability-description,
 .about-bio, .resume-note, .activity-intro > p:last-child,
 .activity-organization, .activity-description {
   font-family: var(--font-body);
   line-height: 1.7;
 }
-.about-bio, .activity-description { max-width: 70ch; } /* readable line length */
+.about-bio, .activity-description { max-width: 70ch; } /* จำกัดความกว้างบรรทัด จะได้อ่านไม่เหนื่อย */
 
-/* Section labels: accent tick + sentence case (edit the HTML text to match) */
+/* ป้ายชื่อแต่ละส่วนมีเส้นสีเน้นนำหน้า ช่วยให้สังเกตหัวข้อได้ไว */
 :root body .work-intro .eyebrow,
 :root body .skills-eyebrow,
 :root body .about-eyebrow,
@@ -2546,7 +2462,7 @@ p { text-wrap: pretty; }
   background: currentColor;
 }
 
-/* 3. NAVBAR: frosted glass, drop-in on load, grow-in underline, accent CTA */
+/* เมนูโปร่งเบลอ เข้ามาจากด้านบน และขีดใต้จะขยายเมื่อชี้หรือเลือก */
 .navbar {
   background-color: color-mix(in srgb, var(--nav-bg) 80%, transparent);
   -webkit-backdrop-filter: blur(14px) saturate(1.4);
@@ -2554,7 +2470,7 @@ p { text-wrap: pretty; }
   animation: pl-nav-drop 700ms var(--ease-out) both;
   transition: background-color 220ms ease, border-color 220ms ease, box-shadow 300ms ease;
 }
-.navbar-wrapper.is-scrolled .navbar { /* class added by enhancements.js */
+.navbar-wrapper.is-scrolled .navbar { /* enhancements.js ใส่คลาสนี้เมื่อเริ่มเลื่อนหน้า */
   background-color: color-mix(in srgb, var(--nav-bg) 94%, transparent);
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.3), 0 3px 10px rgba(0, 0, 0, 0.14);
 }
@@ -2582,8 +2498,8 @@ p { text-wrap: pretty; }
   color: var(--on-accent);
 }
 
-/* 4. HERO: ONE orchestrated load sequence (nav, marquee, portrait, caption) */
-.home-page::before { /* soft glow behind the portrait */
+/* หน้าแรก: จัดจังหวะการเข้ามาของข้อความ รูป และคำแนะนำให้เลื่อนต่อ */
+.home-page::before { /* แสงนุ่ม ๆ อยู่ด้านหลังรูปโปรไฟล์ */
   content: '';
   position: absolute;
   bottom: -18%;
@@ -2595,7 +2511,7 @@ p { text-wrap: pretty; }
   transform: translateX(-50%);
   pointer-events: none;
 }
-.home-marquee { /* text fades out at both edges instead of clipping */
+.home-marquee { /* ไล่จางขอบข้อความ แทนการตัดขอบแบบแข็ง ๆ */
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
   animation: pl-marquee-in 900ms var(--ease-out) 100ms both;
@@ -2607,7 +2523,7 @@ p { text-wrap: pretty; }
   from { opacity: 0; filter: blur(10px); transform: translate(-50%, 7%) scale(0.97); }
 }
 
-.home-caption { /* new HTML: name + role, so visitors know who this is at a glance */
+.home-caption { /* บอกชื่อกับบทบาทให้เห็นชัดตั้งแต่เปิดหน้า */
   position: absolute;
   bottom: clamp(16px, 3vw, 32px);
   left: clamp(16px, 3vw, 40px);
@@ -2618,7 +2534,7 @@ p { text-wrap: pretty; }
 .home-caption-role { margin-top: 2px; font: 400 clamp(13px, 1.3vw, 15px)/1.4 var(--font-body); color: var(--home-hero-text); opacity: 0.72; }
 @keyframes pl-fade-up { from { opacity: 0; transform: translateY(14px); } }
 
-.scroll-cue { /* new HTML: affordance that the page continues */
+.scroll-cue { /* ชวนให้รู้ว่ายังเลื่อนลงไปดูส่วนอื่นได้ */
   position: absolute;
   right: clamp(16px, 3vw, 40px);
   bottom: clamp(16px, 3vw, 32px);
@@ -2635,7 +2551,7 @@ p { text-wrap: pretty; }
 }
 .scroll-cue:hover { opacity: 1; }
 .scroll-cue-mouse { position: relative; width: 22px; height: 34px; border: 1.5px solid currentColor; border-radius: 12px; }
-.scroll-cue-mouse::after { /* wheel dot loops 5 times, then rests */
+.scroll-cue-mouse::after { /* จุดเลื่อนขยับ 5 รอบแล้วหยุด ไม่รบกวนสายตาตลอดเวลา */
   content: '';
   position: absolute;
   top: 6px;
@@ -2649,7 +2565,7 @@ p { text-wrap: pretty; }
 }
 @keyframes pl-wheel { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(10px); } }
 
-/* 5. WORK: blinking cursor, depth-of-field carousel, text/image swap */
+/* ส่วน Work: เคอร์เซอร์กระพริบ และ carousel เน้นภาพกลางให้เด่นกว่าภาพข้าง */
 :root body .title-cursor { background: var(--accent); animation: pl-blink 1.1s steps(1) infinite; }
 @keyframes pl-blink { 50% { opacity: 0; } }
 
@@ -2660,7 +2576,7 @@ p { text-wrap: pretty; }
 .view-more span, .project-link span, .activity-link span { display: inline-block; transition: transform 250ms var(--ease-out); }
 .view-more:hover span, .project-link:hover span, .activity-link:hover span { transform: translate(3px, -1px); }
 
-.project-slide-left, .project-slide-right { filter: saturate(0.7) blur(1.2px); } /* side slides recede */
+.project-slide-left, .project-slide-right { filter: saturate(0.7) blur(1.2px); } /* ทำภาพข้างให้จางและเบลอ เพื่อดันภาพหลักให้เด่น */
 :root body .project-slide-active {
   border-color: var(--accent-line);
   box-shadow: 0 0 0 4px var(--accent-soft), 0 24px 60px -12px var(--lift);
@@ -2668,16 +2584,15 @@ p { text-wrap: pretty; }
 :root body .carousel-arrow:hover { border-color: var(--accent); color: var(--accent); }
 .carousel-arrow:active { transform: scale(0.92); }
 
-.swap-in { animation: pl-swap-in 450ms var(--ease-out) both; } /* class toggled by enhancements.js */
+.swap-in { animation: pl-swap-in 450ms var(--ease-out) both; } /* enhancements.js ใส่คลาสนี้ตอนเปลี่ยนข้อความ */
 @keyframes pl-swap-in { from { opacity: 0; transform: translateY(8px); } }
 .img-new { animation: pl-img-in 450ms var(--ease-out) backwards; }
 @keyframes pl-img-in { from { opacity: 0; transform: scale(1.04); } }
 
-/* 6. SKILLS: tooltips name each icon, tiles glow in their own brand colour */
+/* ส่วน Skills: ชี้ที่ไอคอนแล้วเห็นชื่อ พร้อมสีของเครื่องมือแต่ละตัว */
 .technology { position: relative; transition: transform 250ms var(--ease-out), border-color 250ms ease; }
 body .technology:hover { transform: translateY(-3px); border-color: color-mix(in srgb, currentColor 55%, transparent); }
-.technology::after { /* reads the label already in your HTML (aria-label) */
-  content: attr(aria-label);
+.technology-name {
   position: absolute;
   bottom: calc(100% + 8px);
   left: 50%;
@@ -2693,11 +2608,11 @@ body .technology:hover { transform: translateY(-3px); border-color: color-mix(in
   transition: opacity 180ms ease, transform 180ms var(--ease-out);
   pointer-events: none;
 }
-.technology:hover::after { opacity: 1; transform: translate(-50%, 0); }
+.technology:hover .technology-name { opacity: 1; transform: translate(-50%, 0); }
 
 .capability-card { position: relative; transition: transform 350ms var(--ease-out), border-color 300ms ease, box-shadow 300ms ease; }
 body .capability-card:hover { transform: translateY(-4px); border-color: var(--accent-line); }
-.capability-card::before { /* accent hairline appears on hover */
+.capability-card::before { /* เส้นสีเน้นจะปรากฏตอนเอาเมาส์ชี้การ์ด */
   content: '';
   position: absolute;
   top: -1px;
@@ -2709,7 +2624,7 @@ body .capability-card:hover { transform: translateY(-4px); border-color: var(--a
   transition: opacity 300ms ease;
 }
 .capability-card:hover::before { opacity: 1; }
-:root body .capability-icon { /* heavy grey tile becomes a soft accent tile */
+:root body .capability-icon { /* เปลี่ยนพื้นไอคอนให้เป็นสีเน้นแบบนุ่มตา */
   border-color: var(--accent-line);
   border-radius: 10px;
   background: var(--accent-soft);
@@ -2718,14 +2633,14 @@ body .capability-card:hover { transform: translateY(-4px); border-color: var(--a
 .skill-tags li { padding: 5px 9px; border-radius: 6px; transition: border-color 200ms ease, background-color 200ms ease, color 200ms ease; }
 :root body .skill-tags li:hover { border-color: var(--accent-line); background: var(--accent-soft); color: var(--text-main); }
 
-/* 7. ABOUT: accent portrait ring, bigger stats (counted up by JS), icon hover */
+/* ส่วน About: วงแหวนรูปโปรไฟล์ สถิติ และไอคอนที่ตอบสนองตอนชี้ */
 :root body .profile-portrait { border-color: var(--accent); box-shadow: 0 0 0 5px var(--accent-soft); transition: transform 400ms var(--ease-out); }
 .profile-portrait:hover { transform: rotate(-4deg) scale(1.05); }
 .about-stats dd { font-size: 26px; font-variant-numeric: tabular-nums; }
 .focus-icon { transition: background-color 250ms ease, color 250ms ease, border-color 250ms ease, transform 250ms var(--ease-out); }
 :root body .current-focus-list li:hover .focus-icon { border-color: var(--accent); background: var(--accent); color: var(--on-accent); transform: scale(1.08); }
 
-/* 8. ACTIVITY: "next image" hint on hover, link arrow nudge */
+/* ส่วน Activities: บอกว่ากดดูรูปถัดไปได้ และขยับลูกศรลิงก์นิดหน่อย */
 .activity-image-button::before {
   content: 'Next image';
   position: absolute;
@@ -2747,20 +2662,18 @@ body .capability-card:hover { transform: translateY(-4px); border-color: var(--a
 .activity-link { transition: color 180ms ease; }
 :root body .activity-link:hover { color: var(--accent); }
 
-/* 9. SCROLL REVEAL: restrained, one-time, only on dense content blocks.
-      .js is set in <head> and .reveal by enhancements.js, so content stays
-      visible if JavaScript fails. */
+/* ค่อย ๆ แสดงการ์ดตอนเลื่อนมาถึง ทำครั้งเดียว และเนื้อหายังเห็นได้ถ้า JS ใช้ไม่ได้ */
 .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out); }
 .js .reveal.is-visible { opacity: 1; transform: none; }
 
-/* 10. RESPONSIVE */
+/* ปรับหน้าให้พอดีกับจอมือถือและแท็บเล็ต */
 @media (max-width: 600px) {
   .home-caption, .scroll-cue-label { display: none; }
   .scroll-cue { right: 50%; transform: translateX(50%); }
   .about-stats dd { font-size: 22px; }
 }
 
-/* Tablet: give the skills overview and capability cards full-width rows. */
+/* แท็บเล็ต: แยกภาพรวมทักษะกับการ์ดเป็นแถวเต็มความกว้าง */
 @media (min-width: 601px) and (max-width: 860px) {
   .skills-layout {
     grid-template-columns: minmax(0, 1fr);
@@ -2783,7 +2696,7 @@ body .capability-card:hover { transform: translateY(-4px); border-color: var(--a
   }
 }
 
-/* 11. REDUCED MOTION: also stops your original hero marquee */
+/* ถ้าผู้ใช้เลือกให้ลดการเคลื่อนไหว ก็หยุดแอนิเมชันหลักของหน้า */
 @media (prefers-reduced-motion: reduce) {
   .home-marquee-track { animation: none; }
   .navbar, .home-marquee, .home-portrait, .home-caption, .scroll-cue,
@@ -2794,7 +2707,7 @@ body .capability-card:hover { transform: translateY(-4px); border-color: var(--a
   .view-more span, .project-link span, .activity-link span { transition: none; }
 }
 
-/* CONTACT: a portfolio-styled dispatch desk that adapts to narrow screens. */
+/* ส่วน Contact: จัดข้อมูลกับฟอร์มให้เข้ากับหน้าจอเล็กได้ */
 .contact-page {
   width: calc(100% + 32px);
   margin-top: 28px;
@@ -2823,7 +2736,6 @@ body .capability-card:hover { transform: translateY(-4px); border-color: var(--a
 .contact-eyebrow,
 .contact-panel-label,
 .contact-form-kicker,
-.contact-form-code,
 .contact-field label,
 .contact-topic-field legend,
 .contact-form-status {
@@ -2861,16 +2773,6 @@ body .capability-card:hover { transform: translateY(-4px); border-color: var(--a
   color: var(--text-muted);
   font-family: var(--font-body);
   font-size: 14px;
-}
-
-.contact-form-code {
-  padding: 6px 8px;
-  border: 1px solid var(--nav-border);
-  border-radius: 4px;
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: 9px;
-  white-space: nowrap;
 }
 
 .contact-layout {
@@ -3354,10 +3256,6 @@ body.light-mode .site-footer {
     font-size: 18px;
   }
 
-  .contact-form-code {
-    font-size: 8px;
-  }
-
   .contact-form-footer {
     align-items: flex-start;
     flex-direction: column;
@@ -3386,7 +3284,7 @@ body.light-mode .site-footer {
   }
 }
 
-/* GitHub repository dashboard: a responsive profile and repo browser. */
+/* Dashboard GitHub: แสดงโปรไฟล์และรายการ repo พร้อมปรับตามขนาดจอ */
 .github-dashboard {
   display: grid;
   gap: 16px;

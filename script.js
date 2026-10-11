@@ -2,6 +2,7 @@ const navLinks = [...document.querySelectorAll('.nav-link')];
 const navList = document.querySelector('.nav-links');
 const mobileMenuButton = document.querySelector('.nav-menu-btn');
 
+// เช็กจาก hash ใน URL ว่าตอนนี้อยู่ส่วนไหน แล้วไฮไลต์เมนูให้ตรงกัน
 function updateActiveNavLink() {
   const activeLink = navLinks.find(link => link.hash === window.location.hash) || navLinks[0];
   navLinks.forEach(link => link.classList.toggle('active', link === activeLink));
@@ -14,6 +15,7 @@ updateActiveNavLink();
 let scrollAnimationFrame;
 let previousScrollBehavior = '';
 
+// เลื่อนหน้าแบบค่อย ๆ ไหล และยกเลิกรอบเก่าถ้ามีคำสั่งเลื่อนใหม่เข้ามา
 function scrollToPosition(targetY) {
   if (scrollAnimationFrame) {
     cancelAnimationFrame(scrollAnimationFrame);
@@ -52,10 +54,10 @@ function scrollToElement(target) {
   scrollToPosition(window.scrollY + target.getBoundingClientRect().top - marginTop);
 }
 
+// เปิดหรือปิดเมนูบนมือถือ
 mobileMenuButton.addEventListener('click', () => {
   const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
   mobileMenuButton.setAttribute('aria-expanded', String(!isExpanded));
-  mobileMenuButton.setAttribute('aria-label', isExpanded ? 'Open navigation menu' : 'Close navigation menu');
   navList.classList.toggle('mobile-open', !isExpanded);
 });
 
@@ -70,9 +72,8 @@ navLinks.forEach(link => {
     }
     updateActiveNavLink();
     scrollToElement(target);
-
     mobileMenuButton.setAttribute('aria-expanded', 'false');
-    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+    mobileMenuButton.setAttribute('aria-expanded', 'false');
     navList.classList.remove('mobile-open');
   });
 });
@@ -80,6 +81,7 @@ navLinks.forEach(link => {
 const githubRepositories = document.querySelector('#github-repositories');
 const githubRepositoriesToggle = document.querySelector('#github-repositories-toggle');
 
+// ปุ่มเดียวใช้สลับเปิดปิด dashboard; เปิดครั้งแรกค่อยสั่งให้โหลดข้อมูล GitHub
 if (githubRepositories && githubRepositoriesToggle) {
   githubRepositoriesToggle.addEventListener('click', () => {
     const isOpening = githubRepositories.hidden;
@@ -111,6 +113,7 @@ document.querySelectorAll('a[href^="#"]:not(.nav-link):not(.nav-home-btn)').forE
   });
 });
 
+// ปุ่มรูปบ้านพากลับด้านบนสุด ไม่ว่าจะอยู่ส่วนไหนของหน้า
 const homeLink = document.querySelector('.nav-home-btn');
 homeLink.addEventListener('click', event => {
   event.preventDefault();
@@ -127,6 +130,7 @@ if (traitDeck) {
   const traitStatus = document.querySelector('#trait-card-status');
   let traitOrder = traitCards;
 
+  // ย้ายการ์ดที่เลือกมาไว้ใบหน้า แล้วอัปเดตตำแหน่งของการ์ดทุกใบ
   function moveTraitCardToFront(card) {
     let cardIndex = traitOrder.indexOf(card);
     if (cardIndex === 0) cardIndex = 1;
@@ -155,7 +159,7 @@ if (traitDeck) {
   });
 }
 
-// Handle theme toggle
+// สลับคลาสของทั้งหน้า เพื่อให้ CSS เปลี่ยนสีเป็นธีมสว่างหรือมืด
 const themeBtn = document.querySelector('.nav-theme-btn');
 if (themeBtn) {
   function setLightMode(enabled) {
@@ -163,7 +167,6 @@ if (themeBtn) {
     document.documentElement.classList.toggle('light-mode', enabled);
     themeBtn.setAttribute('aria-pressed', String(enabled));
     const nextMode = enabled ? 'dark' : 'light';
-    themeBtn.setAttribute('aria-label', `Switch to ${nextMode} mode`);
     themeBtn.setAttribute('title', `Switch to ${nextMode} mode`);
   }
 
@@ -178,10 +181,12 @@ if (contactForm) {
     event.preventDefault();
     const formStatus = document.querySelector('#contact-form-status');
     const senderName = new FormData(contactForm).get('name');
+    // ตอนนี้ฟอร์มยังไม่ได้ส่งข้อมูลจริง จึงแจ้งผู้ใช้ตรง ๆ หลังทดลองกดส่ง
     formStatus.textContent = `Thanks${senderName ? `, ${senderName}` : ''}. This form preview is not connected to message delivery yet. Email me at giantgamer1321@gmail.com.`;
   });
 }
 
+// เก็บข้อมูลรูป ชื่อ และคำอธิบายของโปรเจกต์ไว้ชุดเดียว ให้ carousel หยิบไปแสดง
 const projects = [
   {
     title: 'URBS - University Room Booking System',
@@ -211,10 +216,10 @@ if (projectCarousel) {
   const slides = [...projectCarousel.querySelectorAll('.project-slide')];
   const title = document.querySelector('#project-title');
   const description = document.querySelector('#project-description');
-  const projectLink = document.querySelector('.project-link');
   const projectCount = document.querySelector('.project-count');
   let activeProjectIndex = 0;
 
+  // วาดรูปกับข้อความใหม่ โดยคำนวณซ้าย-กลาง-ขวาแบบวนกลับต้น/ท้ายรายการได้
   function renderProjectCarousel() {
     const projectCountTotal = projects.length;
 
@@ -227,7 +232,6 @@ if (projectCarousel) {
 
       image.src = project.image;
       image.alt = `${project.title} project preview`;
-      slide.setAttribute('aria-label', isActive ? `Current project: ${project.title}` : `Show project: ${project.title}`);
       slide.classList.toggle('project-slide-active', isActive);
       slide.classList.toggle('project-slide-side', !isActive);
       slide.classList.toggle('project-slide-left', offset === -1);
@@ -238,17 +242,18 @@ if (projectCarousel) {
     const activeProject = projects[activeProjectIndex];
     title.textContent = activeProject.title;
     description.textContent = activeProject.description;
-    projectLink.setAttribute('aria-label', `View ${activeProject.title}`);
     projectCount.textContent = `${String(activeProjectIndex + 1).padStart(2, '0')} / ${String(projectCountTotal).padStart(2, '0')}`;
   }
 
   function showProject(offset) {
+    // บวกหรือลบตำแหน่ง แล้ววนกลับเมื่อเลื่อนเลยหัวหรือท้ายรายการ
     activeProjectIndex = (activeProjectIndex + offset + projects.length) % projects.length;
     renderProjectCarousel();
   }
 
   const activityItems = [...document.querySelectorAll('[data-activity]')];
   if (activityItems.length) {
+    // จับคู่ id ของกิจกรรมกับไฟล์รูปจริงที่เก็บในโฟลเดอร์ Image
     const activityVisuals = {
       'virtual-assistance': {
         title: 'Freshman Orientation MC',
@@ -279,6 +284,7 @@ if (projectCarousel) {
       const imageTotal = activity.images.length;
 
       function renderActivityImage() {
+        // แสดงรูปตามลำดับ และอัปเดตคำอธิบายกับตัวนับรูป
         image.src = activity.images[imageIndex];
         image.alt = `${activity.title}${imageTotal > 1 ? ` photo ${imageIndex + 1} of ${imageTotal}` : ' photo'}`;
 
@@ -287,13 +293,11 @@ if (projectCarousel) {
           imageCount.textContent = `${imageIndex + 1} / ${imageTotal}`;
         }
 
-        if (button instanceof HTMLButtonElement) {
-          button.setAttribute('aria-label', `Show next photo for ${activity.title} (${imageIndex + 1} of ${imageTotal})`);
-        }
       }
 
       if (imageTotal > 1 && button instanceof HTMLButtonElement) {
         button.addEventListener('click', () => {
+          // มีหลายรูปก็เลื่อนไปภาพถัดไป แล้ววนกลับภาพแรกเมื่อดูครบ
           imageIndex = (imageIndex + 1) % imageTotal;
           renderActivityImage();
         });
@@ -315,6 +319,7 @@ if (projectCarousel) {
   });
 
   projectCarousel.addEventListener('keydown', event => {
+    // ใช้ปุ่มลูกศรซ้าย/ขวาบนคีย์บอร์ดเปลี่ยนโปรเจกต์ได้ด้วย
     if (event.key === 'ArrowLeft') showProject(-1);
     if (event.key === 'ArrowRight') showProject(1);
   });
