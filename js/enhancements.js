@@ -72,7 +72,7 @@
     el.classList.add(cls);
   };
   if (!reduce) {
-    ['#project-title', '#project-description'].forEach(selector => {
+    ['#project-title', '#project-description', '#project-responsibility', '#project-tech-list'].forEach(selector => {
       const el = document.querySelector(selector);
       if (el) new MutationObserver(() => replay(el, 'swap-in')).observe(el, { childList: true });
     });

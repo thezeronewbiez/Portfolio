@@ -186,28 +186,28 @@ if (contactForm) {
   });
 }
 
-// เก็บข้อมูลรูป ชื่อ และคำอธิบายของโปรเจกต์ไว้ชุดเดียว ให้ carousel หยิบไปแสดง
+// เก็บรายละเอียดของแต่ละโปรเจกต์ไว้ด้วยกัน เพื่อให้ carousel เปลี่ยนข้อมูลได้ครบชุด
 const projects = [
   {
     title: 'URBS - University Room Booking System',
     description: 'A university room booking system for managing reservations, tracking availability, and providing real-time information to users.',
+    responsibility: 'Handled system analysis and design documentation independently.',
+    technologies: ['OOAD', 'UML', 'Use Case Diagram', 'Class Diagram'],
     image: 'Image/Work/URBS.jpg',
-    accent: '#1785d1',
-    kind: 'coding'
   },
   {
     title: 'Line Flex Message API',
     description: 'A custom API for generating and sending LINE Flex messages, enabling dynamic and interactive messaging experiences.',
+    responsibility: 'Built the automation workflow, connected the APIs, and designed the Flex Message content.',
+    technologies: ['Python', 'LINE Messaging API', 'Google Drive API', 'Flex Message'],
     image: 'Image/Work/Flex%20Message%20API.png',
-    accent: '#7868e8',
-    kind: 'API'
   },
   {
     title: 'Automatic Script And Ui Overlay Roblox',
     description: 'Developed automation scripts and UI overlays using Lua to manage in-game systems in real-time, while integrating statistical notifications via Discord Webhooks.',
+    responsibility: 'Developed the Lua automation scripts and UI overlay, including Discord webhook notifications.',
+    technologies: ['Lua', 'Automation', 'UI Overlay', 'Discord Webhook'],
     image: 'Image/Work/Roblox.png',
-    accent: '#159c86',
-    kind: 'coding'
   }
 ];
 
@@ -216,6 +216,8 @@ if (projectCarousel) {
   const slides = [...projectCarousel.querySelectorAll('.project-slide')];
   const title = document.querySelector('#project-title');
   const description = document.querySelector('#project-description');
+  const responsibility = document.querySelector('#project-responsibility');
+  const technologyList = document.querySelector('#project-tech-list');
   const projectCount = document.querySelector('.project-count');
   let activeProjectIndex = 0;
 
@@ -242,6 +244,12 @@ if (projectCarousel) {
     const activeProject = projects[activeProjectIndex];
     title.textContent = activeProject.title;
     description.textContent = activeProject.description;
+    responsibility.textContent = activeProject.responsibility;
+    technologyList.replaceChildren(...activeProject.technologies.map(technology => {
+      const tag = document.createElement('li');
+      tag.textContent = technology;
+      return tag;
+    }));
     projectCount.textContent = `${String(activeProjectIndex + 1).padStart(2, '0')} / ${String(projectCountTotal).padStart(2, '0')}`;
   }
 
