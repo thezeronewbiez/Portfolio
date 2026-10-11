@@ -1449,6 +1449,7 @@ body.light-mode .nav-theme-btn .theme-icon-dark {
 }
 
 .profile-portrait {
+  position: relative;
   width: 104px;
   height: 104px;
   overflow: hidden;
@@ -1458,10 +1459,17 @@ body.light-mode .nav-theme-btn .theme-icon-dark {
   box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.035);
 }
 
-.profile-portrait svg {
+.profile-portrait img {
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 4px);
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 125%;
+  height: 125%;
+  max-width: none;
+  object-fit: contain;
+  object-position: center;
+  transform: translate(-50%, -50%);
 }
 
 .about-copy {

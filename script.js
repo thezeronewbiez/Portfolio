@@ -186,18 +186,21 @@ const projects = [
   {
     title: 'URBS - University Room Booking System',
     description: 'A university room booking system for managing reservations, tracking availability, and providing real-time information to users.',
+    image: 'Image/Work/URBS.jpg',
     accent: '#1785d1',
     kind: 'coding'
   },
   {
     title: 'Line Flex Message API',
     description: 'A custom API for generating and sending LINE Flex messages, enabling dynamic and interactive messaging experiences.',
+    image: 'Image/Work/Flex%20Message%20API.png',
     accent: '#7868e8',
     kind: 'API'
   },
   {
     title: 'Automatic Script And Ui Overlay Roblox',
     description: 'Developed automation scripts and UI overlays using Lua to manage in-game systems in real-time, while integrating statistical notifications via Discord Webhooks.',
+    image: 'Image/Work/Roblox.png',
     accent: '#159c86',
     kind: 'coding'
   }
@@ -212,59 +215,6 @@ if (projectCarousel) {
   const projectCount = document.querySelector('.project-count');
   let activeProjectIndex = 0;
 
-  function escapeSvgText(value) {
-    return value.replace(/[&<>"']/g, character => ({
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&apos;'
-    })[character]);
-  }
-
-  function makeProjectPreview(project) {
-    const safeTitle = escapeSvgText(project.title);
-    const safeKind = escapeSvgText(project.kind.toUpperCase());
-    const accent = project.accent;
-    const rows = Array.from({ length: 5 }, (_, index) => {
-      const y = 330 + index * 42;
-      const width = 700 - (index % 3) * 100;
-      return `<rect x="300" y="${y}" width="${width}" height="13" rx="6" fill="#dce2e9"/><rect x="300" y="${y + 21}" width="${Math.max(160, width - 180)}" height="8" rx="4" fill="#edf0f4"/>`;
-    }).join('');
-
-    const artwork = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600">
-      <defs><linearGradient id="hero" x1="0" x2="1" y1="0" y2="1"><stop stop-color="${accent}"/><stop offset="1" stop-color="#182335"/></linearGradient></defs>
-      <rect width="1000" height="600" fill="#f3f5f8"/>
-      <rect width="1000" height="54" fill="#171d27"/>
-      <rect x="28" y="17" width="21" height="21" rx="6" fill="${accent}"/>
-      <rect x="62" y="20" width="110" height="8" rx="4" fill="#eef1f5"/>
-      <rect x="760" y="22" width="46" height="7" rx="3" fill="#7c8796"/>
-      <rect x="824" y="22" width="46" height="7" rx="3" fill="#7c8796"/>
-      <rect x="900" y="13" width="70" height="28" rx="7" fill="${accent}"/>
-      <rect x="0" y="54" width="205" height="546" fill="#202938"/>
-      <rect x="25" y="83" width="150" height="11" rx="5" fill="#e3e7ed"/>
-      <rect x="25" y="120" width="125" height="9" rx="4" fill="#8894a3"/>
-      <rect x="25" y="154" width="142" height="9" rx="4" fill="#8894a3"/>
-      <rect x="25" y="188" width="116" height="9" rx="4" fill="#8894a3"/>
-      <rect x="25" y="222" width="135" height="9" rx="4" fill="#8894a3"/>
-      <rect x="230" y="78" width="740" height="220" rx="14" fill="url(#hero)"/>
-      <text x="270" y="126" fill="#d7e3f0" font-size="16" font-family="JetBrains Mono, monospace" letter-spacing="4">${safeKind}</text>
-      <text x="270" y="185" fill="#ffffff" font-size="34" font-weight="700" font-family="JetBrains Mono, monospace">${safeTitle}</text>
-      <rect x="270" y="216" width="360" height="9" rx="4" fill="#ffffff" opacity=".6"/>
-      <rect x="270" y="238" width="280" height="9" rx="4" fill="#ffffff" opacity=".35"/>
-      <rect x="270" y="261" width="120" height="23" rx="6" fill="#ffffff" opacity=".94"/>
-      <rect x="230" y="320" width="740" height="250" rx="14" fill="#ffffff"/>
-      <rect x="260" y="347" width="190" height="12" rx="5" fill="#263244"/>
-      ${rows}
-      <rect x="790" y="374" width="145" height="160" rx="10" fill="#f4f6f9"/>
-      <circle cx="862" cy="440" r="43" fill="none" stroke="#e2e7ed" stroke-width="13"/>
-      <path d="M862 397a43 43 0 0 1 39 61" fill="none" stroke="${accent}" stroke-width="13" stroke-linecap="round"/>
-      <rect x="830" y="500" width="64" height="8" rx="4" fill="#a2adba"/>
-    </svg>`;
-
-    return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(artwork)}`;
-  }
-
   function renderProjectCarousel() {
     const projectCountTotal = projects.length;
 
@@ -275,7 +225,7 @@ if (projectCarousel) {
       const image = slide.querySelector('.project-image');
       const isActive = offset === 0;
 
-      image.src = makeProjectPreview(project);
+      image.src = project.image;
       image.alt = `${project.title} project preview`;
       slide.setAttribute('aria-label', isActive ? `Current project: ${project.title}` : `Show project: ${project.title}`);
       slide.classList.toggle('project-slide-active', isActive);
